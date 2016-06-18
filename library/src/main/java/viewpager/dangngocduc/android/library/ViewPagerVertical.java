@@ -45,16 +45,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-/**
- * Layout manager that allows the user to flip left and right
- * through pages of data.  You supply an implementation of a
- * {@link PagerAdapter} to generate the pages that the view shows.
- *
- * <p>Note this class is currently under early design and
- * development.  The API will likely change in later updates of
- * the compatibility library, requiring changes to the source code
- * of apps when they are compiled against the newer version.</p>
- */
+
 public class ViewPagerVertical extends ViewGroup {
     private static final String TAG = "ViewPager";
     private static final boolean DEBUG = false;
@@ -117,15 +108,9 @@ public class ViewPagerVertical extends ViewGroup {
      */
     private float mLastMotionX;
     private float mLastMotionY;
-    /**
-     * ID of the active pointer. This is used to retain consistency during
-     * drags/flings if multiple pointers are used.
-     */
+
     private int mActivePointerId = INVALID_POINTER;
-    /**
-     * Sentinel value for no current active pointer.
-     * Used by {@link #mActivePointerId}.
-     */
+ 
     private static final int INVALID_POINTER = -1;
 
     /**
@@ -165,48 +150,18 @@ public class ViewPagerVertical extends ViewGroup {
 
     private int mScrollState = SCROLL_STATE_IDLE;
 
-    /**
-     * Callback interface for responding to changing state of the selected page.
-     */
     public interface OnPageChangeListener {
 
-        /**
-         * This method will be invoked when the current page is scrolled, either as part
-         * of a programmatically initiated smooth scroll or a user initiated touch scroll.
-         *
-         * @param position Position index of the first page currently being displayed.
-         *                 Page position+1 will be visible if positionOffset is nonzero.
-         * @param positionOffset Value from [0, 1) indicating the offset from the page at position.
-         * @param positionOffsetPixels Value in pixels indicating the offset from position.
-         */
+  
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
 
-        /**
-         * This method will be invoked when a new page becomes selected. Animation is not
-         * necessarily complete.
-         *
-         * @param position Position index of the new selected page.
-         */
+
         public void onPageSelected(int position);
 
-        /**
-         * Called when the scroll state changes. Useful for discovering when the user
-         * begins dragging, when the pager is automatically settling to the current page,
-         * or when it is fully stopped/idle.
-         *
-         * @param state The new scroll state.
-         * @see ViewPager#SCROLL_STATE_IDLE
-         * @see ViewPager#SCROLL_STATE_DRAGGING
-         * @see ViewPager#SCROLL_STATE_SETTLING
-         */
+     
         public void onPageScrollStateChanged(int state);
     }
 
-    /**
-     * Simple implementation of the {@link OnPageChangeListener} interface with stub
-     * implementations of each method. Extend this if you do not intend to override
-     * every method of {@link OnPageChangeListener}.
-     */
     public static class SimpleOnPageChangeListener implements OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -379,7 +334,7 @@ public class ViewPagerVertical extends ViewGroup {
      * current page in the view hierarchy in an idle state. Defaults to 1.
      *
      * @return How many pages will be kept offscreen on either side
-     * @see #setOffscreenPageLimit(int)
+     *     setOffscreenPageLimit(int)
      */
     public int getOffscreenPageLimit() {
         return mOffscreenPageLimit;
@@ -390,15 +345,15 @@ public class ViewPagerVertical extends ViewGroup {
      * current page in the view hierarchy in an idle state. Pages beyond this
      * limit will be recreated from the adapter when needed.
      *
-     * <p>This is offered as an optimization. If you know in advance the number
+     * This is offered as an optimization. If you know in advance the number
      * of pages you will need to support or have lazy-loading mechanisms in place
      * on your pages, tweaking this setting can have benefits in perceived smoothness
      * of paging animations and interaction. If you have a small number of pages (3-4)
      * that you can keep active all at once, less time will be spent in layout for
-     * newly created view subtrees as the user pages back and forth.</p>
+     * newly created view subtrees as the user pages back and forth.
      *
-     * <p>You should keep this limit low, especially if your pages have complex layouts.
-     * This setting defaults to 1.</p>
+     * You should keep this limit low, especially if your pages have complex layouts.
+     * This setting defaults to 1.
      *
      * @param limit How many pages will be kept offscreen in an idle state.
      */
@@ -418,9 +373,9 @@ public class ViewPagerVertical extends ViewGroup {
      * Set the margin between pages.
      *
      * @param marginPixels Distance between adjacent pages in pixels
-     * @see #getPageMargin()
-     * @see #setPageMarginDrawable(Drawable)
-     * @see #setPageMarginDrawable(int)
+     *     getPageMargin()
+     *     setPageMarginDrawable(Drawable)
+     *     setPageMarginDrawable(int)
      */
     public void setPageMargin(int marginPixels) {
         final int oldMargin = mPageMargin;
@@ -487,7 +442,7 @@ public class ViewPagerVertical extends ViewGroup {
     }
 
     /**
-     * Like {@link View#scrollBy}, but scroll smoothly instead of immediately.
+     * Like {  View  scrollBy}, but scroll smoothly instead of immediately.
      *
      * @param x the number of pixels to scroll by on the X axis
      * @param y the number of pixels to scroll by on the Y axis
@@ -497,7 +452,7 @@ public class ViewPagerVertical extends ViewGroup {
     }
 
     /**
-     * Like {@link View#scrollBy}, but scroll smoothly instead of immediately.
+     * Like {  View  scrollBy}, but scroll smoothly instead of immediately.
      *
      * @param x the number of pixels to scroll by on the X axis
      * @param y the number of pixels to scroll by on the Y axis
@@ -672,7 +627,7 @@ public class ViewPagerVertical extends ViewGroup {
         if (DEBUG) {
             Log.i(TAG, "Current page list:");
             for (int i=0; i<mItems.size(); i++) {
-                Log.i(TAG, "#" + i + ": page " + mItems.get(i).position);
+                Log.i(TAG, "  " + i + ": page " + mItems.get(i).position);
             }
         }
 
@@ -852,7 +807,7 @@ public class ViewPagerVertical extends ViewGroup {
         for (int i = 0; i < size; ++i) {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
-                if (DEBUG) Log.v(TAG, "Measuring #" + i + " " + child
+                if (DEBUG) Log.v(TAG, "Measuring   " + i + " " + child
                         + ": " + mChildWidthMeasureSpec);
                 child.measure(mChildWidthMeasureSpec, mChildHeightMeasureSpec);
             }
@@ -908,7 +863,7 @@ public class ViewPagerVertical extends ViewGroup {
                 int loff = (height + mPageMargin) * ii.position;
                 int childLeft = getPaddingLeft() ;
                 int childTop = getPaddingTop()+ loff;
-                if (DEBUG) Log.v(TAG, "Positioning #" + i + " " + child + " f=" + ii.object
+                if (DEBUG) Log.v(TAG, "Positioning   " + i + " " + child + " f=" + ii.object
                         + ":" + childLeft + "," + childTop + " " + child.getMeasuredWidth()
                         + "x" + child.getMeasuredHeight());
                 child.layout(childLeft, childTop,
@@ -1312,23 +1267,7 @@ public class ViewPagerVertical extends ViewGroup {
         }
     }
 
-    /**
-     * Start a fake drag of the pager.
-     *
-     * <p>A fake drag can be useful if you want to synchronize the motion of the ViewPager
-     * with the touch scrolling of another view, while still letting the ViewPager
-     * control the snapping motion and fling behavior. (e.g. parallax-scrolling tabs.)
-     * Call {@link #fakeDragBy(float)} to simulate the actual drag motion. Call
-     * {@link #endFakeDrag()} to complete the fake drag and fling as necessary.
-     *
-     * <p>During a fake drag the ViewPager will ignore all touch events. If a real drag
-     * is already in progress, this method will return false.
-     *
-     * @return true if the fake drag began successfully, false if it could not be started.
-     *
-     * @see #fakeDragBy(float)
-     * @see #endFakeDrag()
-     */
+
     public boolean beginFakeDrag() {
         if (mIsBeingDragged) {
             return false;
@@ -1352,8 +1291,8 @@ public class ViewPagerVertical extends ViewGroup {
     /**
      * End a fake drag of the pager.
      *
-     * @see #beginFakeDrag()
-     * @see #fakeDragBy(float)
+     *     beginFakeDrag()
+     *     fakeDragBy(float)
      */
     public void endFakeDrag() {
         if (!mFakeDragging) {
@@ -1380,13 +1319,7 @@ public class ViewPagerVertical extends ViewGroup {
         mFakeDragging = false;
     }
 
-    /**
-     * Fake drag by an offset in pixels. You must have called {@link #beginFakeDrag()} first.
-     *
-     * @param yOffset Offset in pixels to drag by.
-     * @see #beginFakeDrag()
-     * @see #endFakeDrag()
-     */
+
     public void fakeDragBy(float yOffset) {
 
         if (!mFakeDragging) {
@@ -1430,9 +1363,9 @@ public class ViewPagerVertical extends ViewGroup {
      *
      * @return true if currently in a fake drag, false otherwise.
      *
-     * @see #beginFakeDrag()
-     * @see #fakeDragBy(float)
-     * @see #endFakeDrag()
+     *     beginFakeDrag()
+     *     fakeDragBy(float)
+     *     endFakeDrag()
      */
     public boolean isFakeDragging() {
         return mFakeDragging;
